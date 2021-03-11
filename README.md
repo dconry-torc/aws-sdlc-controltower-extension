@@ -491,7 +491,7 @@ Custom Resource failed to stabilize in expected time. If you are using the Pytho
 
 
 ### Packages needed for running tests
-Packages needed to run Unit Tests
+Packages needed to run Linting / Scans / Unit Tests
 
 ```bash
 pip install -r test_requirements.txt

@@ -1,0 +1,28 @@
+# (c) 2021 Amazon Web Services, Inc. or its affiliates. All Rights Reserved.
+# This AWS Content is provided subject to the terms of the AWS Customer Agreement
+# available at http://aws.amazon.com/agreement or other written agreement between
+# Customer and Amazon Web Services, Inc.
+
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.7
+  pre_build:
+    commands:
+      - mkdir logs
+      - timestamp=$(date +%Y%m%d%H%M)
+      - echo "{\"timestamp\":\"${timestamp}\"}" > logs/timestamp.json
+      - apt-get update -y
+      - pip install --upgrade pip
+      - pip install -q --upgrade -r test_requirements.txt
+  build:
+    commands:
+      - bash scripts/scan.sh
+      - bash scripts/lint.sh
+
+artifacts:
+  files:
+    - logs/*
+  discard-paths: yes
